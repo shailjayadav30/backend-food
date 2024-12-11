@@ -8,13 +8,18 @@ import protectedrouter from "./route/authroute.js"
 dotenv.config();
 const app = express();
 
-app.use(cors());
+app.use(cors(
+  {
+    origin:"*",
+    methods:["GET","POST","PUT","DELETE"]
+  }
+));
 app.use(express.json());
 
 app.use("/auth", authrouter);
 app.use("/api",protectedrouter)
 
-app.get("/", (req, res) => {
+app.get("/", ( res) => {
   res.send("Backend server is running");
 });
 
